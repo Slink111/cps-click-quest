@@ -1,14 +1,17 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { CPSTest } from "@/components/CPSTest";
+import { useEffect } from "react";
 
 const Index = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    // SEO optimization
+    document.title = "CPS Test - Clicks Per Second Test Online | Free Click Speed Test";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Test your clicking speed with our free CPS test. Measure your clicks per second with multiple time modes. Improve your click speed and compete with yourself!');
+    }
+  }, []);
+
+  return <CPSTest />;
 };
 
 export default Index;
