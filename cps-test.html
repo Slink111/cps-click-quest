@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Test - Clicks Per Second Test Online | Free Click Speed Test</title>
+    <meta name="description" content="Test your clicking speed with our free CPS test. Measure your clicks per second with multiple time modes (1s, 5s, 10s, 30s, 60s). Improve your click speed and compete with yourself!">
+    <meta name="keywords" content="cps test, clicks per second, click speed test, clicking game, mouse clicking test, reaction time test">
+    <meta name="author" content="CPS Test">
+    
+    <meta property="og:title" content="CPS Test - Free Clicks Per Second Test Online">
+    <meta property="og:description" content="Test your clicking speed with our free CPS test. Multiple time modes available. Track your personal bests and improve your clicking skills!">
+    <meta property="og:type" content="website">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Gaming Dark Theme */
+            --background: hsl(220, 28%, 8%);
+            --foreground: hsl(220, 20%, 95%);
+            --card: hsl(220, 24%, 12%);
+            --card-foreground: hsl(220, 20%, 95%);
+            
+            /* Electric Blue Primary */
+            --primary: hsl(217, 91%, 60%);
+            --primary-foreground: hsl(220, 28%, 8%);
+            --primary-glow: hsl(217, 91%, 70%);
+            
+            /* Purple Secondary */
+            --secondary: hsl(260, 75%, 65%);
+            --secondary-foreground: hsl(220, 20%, 95%);
+            --secondary-glow: hsl(260, 75%, 75%);
+            
+            /* Neon Accent */
+            --accent: hsl(310, 100%, 70%);
+            --accent-foreground: hsl(220, 28%, 8%);
+            --accent-glow: hsl(310, 100%, 80%);
+            
+            --muted: hsl(220, 20%, 20%);
+            --muted-foreground: hsl(220, 10%, 65%);
+            --border: hsl(220, 20%, 20%);
+            
+            /* Gaming Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
+            --gradient-secondary: linear-gradient(135deg, var(--secondary), var(--secondary-glow));
+            --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-glow));
+            --gradient-bg: linear-gradient(135deg, var(--background), hsl(220, 24%, 12%));
+            
+            /* Gaming Shadows */
+            --shadow-glow-primary: 0 0 30px hsla(217, 91%, 60%, 0.3);
+            --shadow-glow-accent: 0 0 30px hsla(310, 100%, 70%, 0.3);
+            --shadow-click: 0 0 40px hsla(217, 91%, 60%, 0.6);
+            
+            --radius: 0.75rem;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--foreground);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            gap: 2rem;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--muted-foreground);
+        }
+
+        .card {
+            background: linear-gradient(135deg, hsla(220, 24%, 12%, 0.8), hsla(220, 24%, 12%, 0.6));
+            backdrop-filter: blur(12px);
+            border: 1px solid hsla(220, 20%, 20%, 0.5);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 32px hsla(217, 91%, 60%, 0.1);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .time-selection {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .time-selection h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--foreground);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .time-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            padding: 0.5rem 1rem;
+            min-width: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--foreground);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--accent-foreground);
+        }
+
+        .btn-game {
+            background: var(--gradient-primary);
+            color: var(--primary-foreground);
+            box-shadow: var(--shadow-glow-primary);
+            font-weight: 600;
+        }
+
+        .btn-game:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-click);
+        }
+
+        .btn-game:active {
+            transform: translateY(0px) scale(0.98);
+        }
+
+        .btn-click {
+            background: var(--gradient-accent);
+            color: var(--accent-foreground);
+            box-shadow: var(--shadow-glow-accent);
+            font-weight: bold;
+        }
+
+        .btn-click:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-click:active {
+            transform: scale(0.98);
+            box-shadow: var(--shadow-click);
+        }
+
+        .game-area {
+            width: 100%;
+            max-width: 768px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        .stat-clicks { color: var(--primary); }
+        .stat-time { color: var(--accent); }
+        .stat-cps { color: var(--secondary); }
+
+        .click-area {
+            position: relative;
+            width: 100%;
+            height: 16rem;
+            border-radius: var(--radius);
+            border: 2px dashed hsla(220, 20%, 20%, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .click-area:hover {
+            border-color: hsla(217, 91%, 60%, 0.5);
+            background: hsla(217, 91%, 60%, 0.05);
+        }
+
+        .click-area.active {
+            border: 2px solid var(--accent);
+            background: hsla(310, 100%, 70%, 0.1);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: var(--shadow-glow-primary);
+            }
+            50% {
+                box-shadow: var(--shadow-click);
+            }
+        }
+
+        .click-text {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .click-main-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--foreground);
+            margin-bottom: 0.5rem;
+        }
+
+        .click-sub-text {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            transform: scale(0);
+            animation: ripple 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .results-card {
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--foreground);
+            margin-bottom: 1rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-item {
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .result-label {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        .new-best {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .personal-bests {
+            width: 100%;
+            max-width: 448px;
+            padding: 1.5rem;
+        }
+
+        .pb-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .pb-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .pb-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pb-time {
+            color: var(--muted-foreground);
+        }
+
+        .pb-score {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .click-main-text {
+                font-size: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="title">CPS Test</h1>
+            <p class="subtitle">Test your clicking speed and reflexes</p>
+        </div>
+
+        <!-- Time Mode Selection -->
+        <div class="card time-selection">
+            <div class="card-content">
+                <h3>Select Time Mode</h3>
+                <div class="time-buttons" id="timeButtons">
+                    <button class="btn btn-game" data-time="1">1s</button>
+                    <button class="btn btn-outline" data-time="5">5s</button>
+                    <button class="btn btn-outline" data-time="10">10s</button>
+                    <button class="btn btn-outline" data-time="30">30s</button>
+                    <button class="btn btn-outline" data-time="60">60s</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-area">
+            <!-- Stats Display -->
+            <div class="stats-grid">
+                <div class="card stat-card">
+                    <div class="stat-value stat-clicks" id="clickCount">0</div>
+                    <div class="stat-label">Clicks</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-value stat-time" id="timeLeft">0.0s</div>
+                    <div class="stat-label">Time Left</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-value stat-cps" id="cpsDisplay">0.00</div>
+                    <div class="stat-label">CPS</div>
+                </div>
+            </div>
+
+            <!-- Click Area -->
+            <div class="click-area" id="clickArea">
+                <div class="click-text">
+                    <div class="click-main-text" id="clickMainText">Click to Start</div>
+                    <div class="click-sub-text" id="clickSubText">1 second test</div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="card results-card hidden" id="resultsCard">
+                <h3 class="results-title">Test Complete!</h3>
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-value stat-cps" id="finalCPS">0.00</div>
+                        <div class="result-label">Your CPS</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-value stat-cps" id="personalBest">0.00</div>
+                        <div class="result-label">Personal Best</div>
+                    </div>
+                </div>
+                <div class="new-best hidden" id="newBestMessage">🎉 New Personal Best!</div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons hidden" id="actionButtons">
+                <button class="btn btn-game" id="resetBtn">Reset</button>
+                <button class="btn btn-click hidden" id="tryAgainBtn">Try Again</button>
+            </div>
+        </div>
+
+        <!-- Personal Bests -->
+        <div class="card personal-bests hidden" id="personalBestsCard">
+            <div class="card-content">
+                <h3 class="pb-title">Personal Bests</h3>
+                <div class="pb-list" id="personalBestsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class CPSTest {
+            constructor() {
+                this.TIME_MODES = [1, 5, 10, 30, 60];
+                this.gameStats = {
+                    clicks: 0,
+                    timeLeft: 0,
+                    cps: 0,
+                    isActive: false,
+                    isFinished: false,
+                    selectedTime: 1
+                };
+                this.personalBests = this.loadPersonalBests();
+                this.interval = null;
+                this.rippleId = 0;
+                
+                this.initializeElements();
+                this.bindEvents();
+                this.updateDisplay();
+                this.updatePersonalBestsDisplay();
+            }
+
+            initializeElements() {
+                this.elements = {
+                    timeButtons: document.getElementById('timeButtons'),
+                    clickArea: document.getElementById('clickArea'),
+                    clickMainText: document.getElementById('clickMainText'),
+                    clickSubText: document.getElementById('clickSubText'),
+                    clickCount: document.getElementById('clickCount'),
+                    timeLeft: document.getElementById('timeLeft'),
+                    cpsDisplay: document.getElementById('cpsDisplay'),
+                    resultsCard: document.getElementById('resultsCard'),
+                    finalCPS: document.getElementById('finalCPS'),
+                    personalBest: document.getElementById('personalBest'),
+                    newBestMessage: document.getElementById('newBestMessage'),
+                    actionButtons: document.getElementById('actionButtons'),
+                    resetBtn: document.getElementById('resetBtn'),
+                    tryAgainBtn: document.getElementById('tryAgainBtn'),
+                    personalBestsCard: document.getElementById('personalBestsCard'),
+                    personalBestsList: document.getElementById('personalBestsList')
+                };
+            }
+
+            bindEvents() {
+                // Time button clicks
+                this.elements.timeButtons.addEventListener('click', (e) => {
+                    if (e.target.dataset.time && !this.gameStats.isActive) {
+                        this.selectTimeMode(parseInt(e.target.dataset.time));
+                    }
+                });
+
+                // Click area clicks
+                this.elements.clickArea.addEventListener('click', (e) => {
+                    if (this.gameStats.isFinished || !this.gameStats.isActive) {
+                        this.startGame();
+                    } else if (this.gameStats.isActive) {
+                        this.handleClick(e);
+                    }
+                });
+
+                // Action buttons
+                this.elements.resetBtn.addEventListener('click', () => this.resetGame());
+                this.elements.tryAgainBtn.addEventListener('click', () => this.startGame());
+            }
+
+            loadPersonalBests() {
+                const saved = localStorage.getItem('cps-personal-bests');
+                return saved ? JSON.parse(saved) : {};
+            }
+
+            savePersonalBests() {
+                localStorage.setItem('cps-personal-bests', JSON.stringify(this.personalBests));
+            }
+
+            selectTimeMode(time) {
+                if (this.gameStats.isActive) return;
+                
+                this.gameStats.selectedTime = time;
+                this.gameStats.isFinished = false;
+                this.updateTimeButtons();
+                this.updateDisplay();
+            }
+
+            updateTimeButtons() {
+                const buttons = this.elements.timeButtons.querySelectorAll('button');
+                buttons.forEach(btn => {
+                    const time = parseInt(btn.dataset.time);
+                    if (time === this.gameStats.selectedTime) {
+                        btn.className = 'btn btn-game';
+                    } else {
+                        btn.className = 'btn btn-outline';
+                    }
+                    btn.disabled = this.gameStats.isActive;
+                });
+            }
+
+            startGame() {
+                this.gameStats = {
+                    clicks: 0,
+                    timeLeft: this.gameStats.selectedTime,
+                    cps: 0,
+                    isActive: true,
+                    isFinished: false,
+                    selectedTime: this.gameStats.selectedTime
+                };
+
+                this.elements.clickArea.classList.add('active');
+                this.elements.resultsCard.classList.add('hidden');
+                this.elements.actionButtons.classList.add('hidden');
+                
+                this.updateDisplay();
+                this.updateTimeButtons();
+                this.startTimer();
+            }
+
+            startTimer() {
+                this.interval = setInterval(() => {
+                    this.gameStats.timeLeft -= 0.1;
+                    this.gameStats.cps = this.gameStats.clicks / (this.gameStats.selectedTime - this.gameStats.timeLeft);
+                    
+                    if (this.gameStats.timeLeft <= 0) {
+                        this.gameStats.timeLeft = 0;
+                        this.gameStats.cps = this.gameStats.clicks / this.gameStats.selectedTime;
+                        this.gameStats.isActive = false;
+                        this.gameStats.isFinished = true;
+                        this.endGame();
+                    }
+                    
+                    this.updateDisplay();
+                }, 100);
+            }
+
+            handleClick(event) {
+                if (!this.gameStats.isActive) return;
+
+                const rect = this.elements.clickArea.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                
+                this.createRipple(x, y);
+                this.gameStats.clicks++;
+                this.updateDisplay();
+            }
+
+            createRipple(x, y) {
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                ripple.style.left = (x - 20) + 'px';
+                ripple.style.top = (y - 20) + 'px';
+                ripple.style.width = '40px';
+                ripple.style.height = '40px';
+                
+                this.elements.clickArea.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            }
+
+            endGame() {
+                clearInterval(this.interval);
+                this.elements.clickArea.classList.remove('active');
+                
+                // Check for personal best
+                const currentBest = this.personalBests[this.gameStats.selectedTime] || 0;
+                const isNewBest = this.gameStats.cps > currentBest;
+                
+                if (isNewBest) {
+                    this.personalBests[this.gameStats.selectedTime] = this.gameStats.cps;
+                    this.savePersonalBests();
+                    this.elements.newBestMessage.classList.remove('hidden');
+                } else {
+                    this.elements.newBestMessage.classList.add('hidden');
+                }
+                
+                this.elements.finalCPS.textContent = this.gameStats.cps.toFixed(2);
+                this.elements.personalBest.textContent = (this.personalBests[this.gameStats.selectedTime] || 0).toFixed(2);
+                
+                this.elements.resultsCard.classList.remove('hidden');
+                this.elements.actionButtons.classList.remove('hidden');
+                this.elements.tryAgainBtn.classList.remove('hidden');
+                
+                this.updateTimeButtons();
+                this.updatePersonalBestsDisplay();
+            }
+
+            resetGame() {
+                clearInterval(this.interval);
+                this.gameStats = {
+                    clicks: 0,
+                    timeLeft: 0,
+                    cps: 0,
+                    isActive: false,
+                    isFinished: false,
+                    selectedTime: this.gameStats.selectedTime
+                };
+                
+                this.elements.clickArea.classList.remove('active');
+                this.elements.resultsCard.classList.add('hidden');
+                this.elements.actionButtons.classList.add('hidden');
+                
+                this.updateDisplay();
+                this.updateTimeButtons();
+            }
+
+            updateDisplay() {
+                this.elements.clickCount.textContent = this.gameStats.clicks;
+                this.elements.timeLeft.textContent = this.gameStats.timeLeft.toFixed(1) + 's';
+                this.elements.cpsDisplay.textContent = (this.gameStats.cps || 0).toFixed(2);
+                
+                if (this.gameStats.isFinished) {
+                    this.elements.clickMainText.textContent = 'Click to Play Again';
+                    this.elements.clickSubText.textContent = '';
+                } else if (this.gameStats.isActive) {
+                    this.elements.clickMainText.textContent = 'CLICK!';
+                    this.elements.clickSubText.textContent = '';
+                } else {
+                    this.elements.clickMainText.textContent = 'Click to Start';
+                    this.elements.clickSubText.textContent = this.gameStats.selectedTime + ' second test';
+                }
+            }
+
+            updatePersonalBestsDisplay() {
+                const hasResults = Object.keys(this.personalBests).length > 0;
+                
+                if (hasResults) {
+                    this.elements.personalBestsCard.classList.remove('hidden');
+                    this.elements.personalBestsList.innerHTML = '';
+                    
+                    this.TIME_MODES.forEach(time => {
+                        if (this.personalBests[time]) {
+                            const item = document.createElement('div');
+                            item.className = 'pb-item';
+                            item.innerHTML = `
+                                <span class="pb-time">${time} seconds:</span>
+                                <span class="pb-score">${this.personalBests[time].toFixed(2)} CPS</span>
+                            `;
+                            this.elements.personalBestsList.appendChild(item);
+                        }
+                    });
+                } else {
+                    this.elements.personalBestsCard.classList.add('hidden');
+                }
+            }
+        }
+
+        // Initialize the game when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new CPSTest();
+        });
+    </script>
+</body>
+</html>
